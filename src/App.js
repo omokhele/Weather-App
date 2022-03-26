@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Input from './components/Input';
+import { fetchData } from './services/constants'
+import WeatherCard from './components/WeatherCard';
 
 function App() {
+
+// weatherData is where we store the response data from api call
+// value is where we keep track of what is being inserted in our input field
+    // 1st way
+    // const [weatherData, setWeatherData]= useState({/   
+    //   weather: {},
+    //   value: ''
+    // })
+
+  // const answers = fetchData();
+
+  const [value, setValue] = useState('');
+  const [weatherData, setWeatherData]= useState({fetchData})
+  
+  // Create functions that handle event changes
+  //Also for submit changes
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Input />
+      <WeatherCard weathers = {weatherData}/>
+       
     </div>
   );
 }
