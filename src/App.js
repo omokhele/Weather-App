@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Input from './components/Input';
 import { fetchData } from './services/constants'
 import WeatherCard from './components/WeatherCard';
+
 
 function App() {
 
