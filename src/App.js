@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Input from './components/Input';
 import { fetchData } from './services/constants'
@@ -17,20 +17,41 @@ function App() {
 
   // const answers = fetchData();
 
+  // console.log(fetchData(results))
+  
+  const [weatherData, setWeatherData]= useState({})
   const [value, setValue] = useState('');
-  const [weatherData, setWeatherData]= useState({fetchData})
-  
-  // Create functions that handle event changes
-  //Also for submit changes
 
+  const handleChange = (event) => {
+    setValue(event.target.value)
+  }
   
-  return (
-    <div className="App">
-      <Input />
-      <WeatherCard weathers = {weatherData}/>
-       
-    </div>
-  );
-}
+    // const handleSubmit = async  (event) => {
+    //   // event.preventDefault()
+    //   const forecast = fetchData(value)
+    //   console.log(forecast)
+    //   setWeatherData(forecast)
+      
+    // }
 
-export default App;
+    const handleButton = async (event) => {
+      event.preventDefault()
+      const forecast = await fetchData(value)
+      setWeatherData(forecast)
+      console.log(forecast)
+    }
+
+
+    return (
+          <div className="App">
+            <Input onChange = {(e) => handleChange(e)} onClick = {(e) => handleButton(e)}/>
+            <WeatherCard forecast = {weatherData} />
+          </div>
+        );
+      }
+
+      export default App;
+
+
+//temp={weatherData.temp} feels_like= {weatherData.feels_like} humidity={weatherData.humidity} pressure={weatherData.pressure}
+
